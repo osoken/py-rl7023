@@ -75,9 +75,9 @@ class RL7023(Thread):
                 if ok != 'OK':
                     continue
                 ln = self.__read_expected_pattern(r'EVENT 2[45].*')
-                if ln.strip() == 'EVENT 24':
+                if ln.strip().startswith('EVENT 24'):
                     raise RL7023ConnectionFailed()
-                elif ln.strip() == 'EVENT 25':
+                elif ln.strip().startswith('EVENT 25'):
                     self.__readline()
                     return res
         raise RL7023ScanFailed()
