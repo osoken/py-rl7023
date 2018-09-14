@@ -113,7 +113,7 @@ class RL7023(Thread):
         return self.__write(bytes(s))
 
     def __readline(self):
-        ln = self.serial.readline().strip()
+        ln = self.serial.readline().rstrip()
         print(ln)
         return ln
 
