@@ -87,7 +87,8 @@ class RL7023(Thread):
         return {
             d[0].strip(): d[1].strip() for d in
             map(lambda x: x.strip().split(':', 1),
-                self.__read_until(r'EVENT 22.*'))
+                filter(lambda x: x.startswith('  '),
+                       self.__read_until(r'EVENT 22.*')))
         }
 
     def __set_password(self, rb_password):
