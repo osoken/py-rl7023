@@ -57,7 +57,7 @@ class RL7023(Thread):
         for dur in range(4, 15):
             res = self.__scan(dur)
             if all(('Channel' in res, 'Pan ID' in res, 'Addr' in res)):
-                self.__write('SKSREG 52 {}\r\n'.format(res['Channel']))
+                self.__write('SKSREG S2 {}\r\n'.format(res['Channel']))
                 self.__readline()
                 ok = self.__readline().strip()
                 if ok != 'OK':
