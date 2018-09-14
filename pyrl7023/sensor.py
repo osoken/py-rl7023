@@ -120,8 +120,8 @@ class RL7023(Thread):
         return self.__write(bytes(s))
 
     def __readline(self):
-        ln = self.serial.readline().rstrip()
-        self.debug_log(ln.decode('unicode_escape'))
+        ln = self.serial.readline().rstrip().decode('unicode_escape')
+        self.debug_log(ln)
         return ln
 
     def __read_until(self, ptrn, exclude_last_line=True):
