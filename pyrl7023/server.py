@@ -29,7 +29,8 @@ def gen_app(rb_id, rb_password, config_object=None, logsetting_file=None):
         rb_id, rb_password,
         app.config['DEVICE'],
         baudrate=app.config['BAUDRATE'],
-        hook=lambda v: app.logger.info('sensor value.', extra=v)
+        hook=lambda v: app.logger.info('sensor value.', extra=v),
+        logger=app.logger
     )
 
     @app.route('/api/power_consumption')

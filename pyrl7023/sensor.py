@@ -39,11 +39,12 @@ class RL7023ReadError(RL7023Error):
 
 class RL7023(Thread):
     def __init__(self, rb_id, rb_password, dev, baudrate=115200,
-                 hook=None):
+                 hook=None, logger=None):
         super(RL7023, self).__init__()
         self.serial = serial.Serial(
             dev, baudrate=baudrate
         )
+        self.logger = logger
         self.__set_password(rb_password)
         self.__set_id(rb_id)
         connection_info = self.__set_connection()
@@ -52,6 +53,12 @@ class RL7023(Thread):
         self.__renew()
         self.__hook = hook if hook is not None else lambda v: None
         self.start()
+
+    def debug_log(self, msg):
+        if self.logger is None:
+            print(msg)
+        else:
+            self.logger.debug('data', extra={'data': msg})
 
     def __set_connection(self):
         for dur in range(4, 15):
@@ -114,7 +121,7 @@ class RL7023(Thread):
 
     def __readline(self):
         ln = self.serial.readline().rstrip()
-        print(ln)
+        self.debug_log(ln)
         return ln
 
     def __read_until(self, ptrn, exclude_last_line=True):
