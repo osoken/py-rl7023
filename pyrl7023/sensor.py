@@ -135,7 +135,7 @@ class RL7023(Thread):
     def __renew(self):
         seq = b'\x10\x81\x00\x01\x05\xFF\x01\x02\x88\x01\x62\x01\xE7\x00'
         self.__write(
-            'SKSENDTO 1 {} 0E1A 1 {:04X}'.format(
+            'SKSENDTO 1 {} 0E1A 1 {:04X} '.format(
                 self.ipv6_addr, len(seq)
             ).encode('utf-8') + seq
         )
