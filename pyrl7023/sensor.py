@@ -116,12 +116,12 @@ class RL7023(Thread):
         if isinstance(s, bytes):
             return self.serial.write(s)
         if isinstance(s, str):
-            return self.__write(s.encode('utf-8'))
+            return self.__write(s.encode('raw_unicode_escape'))
         return self.__write(bytes(s))
 
     def __readline(self):
         ln = self.serial.readline().rstrip()
-        self.debug_log(ln)
+        self.debug_log(ln.decode('unicode_escape'))
         return ln
 
     def __read_until(self, ptrn, exclude_last_line=True):
