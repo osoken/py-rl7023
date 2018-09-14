@@ -143,7 +143,7 @@ class RL7023(Thread):
         self.__readline()
         self.__readline()
         data = self.__readline()
-        if not data.startswith('ERXUDDP'):
+        if not data.startswith('ERXUDP'):
             return self.__renew()
         cols = data.strip().split(' ')
         res = cols[8]
