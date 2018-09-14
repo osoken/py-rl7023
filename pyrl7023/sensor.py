@@ -140,10 +140,8 @@ class RL7023(Thread):
             ).encode('utf-8') + seq
         )
         self.__readline()
-        if self.__readline().strip() != 'EVENT 21':
-            raise RL7023ReadError()
-        if self.__readline().strip() != 'OK':
-            raise RL7023ReadError()
+        self.__readline()
+        self.__readline()
         data = self.__readline()
         if not data.startswith('ERXUDDP'):
             return self.__renew()
